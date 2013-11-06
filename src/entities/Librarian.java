@@ -60,6 +60,4 @@ public class Librarian implements Serializable{
 	public void setSalary(BigDecimal salary) {
 		this.salary = salary;
 	}
-	
-	
 }

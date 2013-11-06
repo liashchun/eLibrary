@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<h:body>
+	<h:form>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Name" />
+				<h:inputText id="name" value="#{hello.name}" />
+				<h:outputText value="Surnamename" />
+				<h:inputText id="surname" value="#{hello.surname}" />
+				<h:commandButton value="Say hello">
+					<f:ajax execute="@form" render="output" />
+				</h:commandButton>
+			</h:panelGrid>
+			<h2>
+				<h:panelGroup id="output">
+					<h:outputText value="Welcome! " />
+					<h:outputText id="nameoutput" value="Your name is: #{hello.name}"
+						rendered="#{not empty hello.name}" />
+					<h:outputText id="surnameoutput"
+						value="and surname is: #{hello.surname}"
+						rendered="#{not empty hello.surname}" />
+				</h:panelGroup>
+			</h2>
+		</h:form>
+	</h:form>
+</h:body>
+</html>
