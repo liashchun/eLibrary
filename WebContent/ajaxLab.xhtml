@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head></h:head>
+<h:body>
+
+	<h:dataTable value = "#{table.people}" var="person">
+		<h:column>
+			#{person.name}
+		</h:column>
+		<h:column>
+			#{person.email}
+		</h:column>
+		<h:column>
+			<h:form>
+
+					<h:commandButton action="#{table.edit(item)}" value = "Edit">
+					</h:commandButton>
+
+			</h:form>
+		</h:column>
+	</h:dataTable>
+		
+	<h:form>
+		<h:inputText value="#{table.currentPerson.name}">
+			</h:inputText>
+		<h:inputText value="#{table.currentPerson.email}">
+			</h:inputText>
+		<h:commandButton action = "#{table.add}" value="Add" />
+	</h:form>
+	
+</h:body>
+</html>

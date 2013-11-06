@@ -11,10 +11,10 @@
 			<h:panelGrid columns="2">
 				<h:outputText value="Name" />
 				<h:inputText id="name" value="#{hello.name}" />
-				<h:outputText value="Surnamename" />
+				<h:outputText value="Surname" />
 				<h:inputText id="surname" value="#{hello.surname}" />
 				<h:commandButton value="Say hello">
-					<f:ajax execute="name" render="output" />
+<!-- 					<f:ajax execute="name" render="output" /> -->
 				</h:commandButton>
 			</h:panelGrid>
 			<h2>
@@ -22,7 +22,7 @@
 					<h:outputText value="Welcome! " />
 					<h:outputText id="nameoutput" value="Your name is: #{hello.name}" />
 					<h:outputText id="surnameoutput"
-						value="and surname is: #{hello.surname}" />
+						value=" and surname is: #{hello.surname}" />
 				</h:panelGroup>
 			</h2>
 		</h:form>

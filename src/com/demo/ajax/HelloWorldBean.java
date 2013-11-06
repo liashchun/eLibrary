@@ -15,6 +15,7 @@ public class HelloWorldBean {
 
 	public void setName(String name) {
 		this.name = name;
+		System.out.print(name);
 	}
 
 	public String getSurname() {
