@@ -9,28 +9,26 @@
 </h:head>
 <h:body>
 
-	<h:dataTable border = "2" value = "#{table.people}" var="item">
-		<h:column border = "2">
+	<h:dataTable border="2" value = "#{table.people}" var="item" width = "530" style="FONT-SIZE: small;">
+		<h:column border="2">
 			#{item.name}
 		</h:column>
-		<h:column border = "2">
+		<h:column border= "2">
 			#{item.email}
 		</h:column>
 		<h:column border = "2">
 			<h:form>
-			
-					<h:commandButton action="#{table.remove(item)}" value = "Remove">
-					</h:commandButton>
-
-					<h:commandButton action="#{table.edit(item)}" value = "Edit">
-					</h:commandButton>
-					
+				<h:commandButton action="#{table.remove(item)}" value = "Remove" />
+				<h:commandButton action="#{table.edit(item)}" value = "Edit" />	
 			</h:form>		
 		</h:column>
 	</h:dataTable>
 <!-- 		Form for adding persons -->
+
 	<h:form>
-		<h:commandButton action="#{table.showAdd()}" value = "Add" />
+		<div style="margin:0px 0px 0px 385px;" > 
+			<h:commandButton action="#{table.showAdd()}" value = "Add" />
+		</div>
 	</h:form>
 
 <!-- 		Form for editing persons -->
