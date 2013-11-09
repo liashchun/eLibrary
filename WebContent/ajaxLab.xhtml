@@ -9,14 +9,14 @@
 </h:head>
 <h:body>
 
-	<h:dataTable value = "#{table.people}" var="item">
-		<h:column>
+	<h:dataTable border = "2" value = "#{table.people}" var="item">
+		<h:column border = "2">
 			#{item.name}
 		</h:column>
-		<h:column>
+		<h:column border = "2">
 			#{item.email}
 		</h:column>
-		<h:column>
+		<h:column border = "2">
 			<h:form>
 			
 					<h:commandButton action="#{table.remove(item)}" value = "Remove">
@@ -35,16 +35,16 @@
 
 <!-- 		Form for editing persons -->
 	<h:form>
-		<h:panelGrid columns="2" title="editing panelGroup">
+		<h:panelGrid columns="2" id="panelGroupEditingId" rendered="#{table.canEdit}">
 			<h:inputText value="#{table.currentPerson.name}" />
 			<h:inputText value="#{table.currentPerson.email}" />
 			<h:commandButton action = "#{table.cancel}" value="Cancel" />
-			<h:commandButton action = "#{table.edit(table.currentPerson)}" value="Save" />
+			<h:commandButton action = "#{table.saveEdition()}" value="Save" />
 		</h:panelGrid> 
   	</h:form>
 <!-- 		Form for adding persons -->
 	<h:form>
-		<h:panelGrid columns="2" title="adding panelGroup">
+		<h:panelGrid columns="2" title="adding panelGroup" rendered="#{table.canAdd}">
 			<h:inputText value="#{table.currentPerson.name}" />
 			<h:inputText value="#{table.currentPerson.email}" />
 			<h:commandButton action = "#{table.cancel}" value="Cancel" />

@@ -12,6 +12,17 @@ public class TableBean implements Serializable {
 	
 	private List<Person> people;
 	private Person currentPerson;
+	private boolean canAdd;
+	private boolean canEdit;
+	
+	{	// initial table loading
+		initPeople();
+		for (int i = 0; i < 10; i++) {
+			people.add(Person.createRandomPerson());
+		}
+		canAdd = false;
+		canEdit = false;
+	}
 		
 	public Person getCurrentPerson() {
 		return currentPerson;
@@ -25,15 +36,7 @@ public class TableBean implements Serializable {
 		this.people = people;
 	}
 
-	{
-		initPeople();
-		for (int i = 0; i < 10; i++) {
-			people.add(Person.createRandomPerson());
-		}
-				
-	}
 	public TableBean() {
-		initPeople();
 	}
 	
 	public List<Person> getPeople() {
@@ -43,6 +46,7 @@ public class TableBean implements Serializable {
 	public void add() {
 		initPeople();
 		people.add(currentPerson);
+		canAdd = false;
 	}
 	
 	private void initPeople() {
@@ -57,27 +61,46 @@ public class TableBean implements Serializable {
 	public void save() {
 		initPeople();
 		people.add(currentPerson);
+		canAdd = false;
 	}
 	
 	public void showAdd() {
 		currentPerson = new Person("" , "");
+		canAdd = true;
 	}
 	
+	public boolean isCanAdd() {
+		return canAdd;
+	}
+
+	public void setCanAdd(boolean isAdd) {
+		this.canAdd = isAdd;
+	}
+
+	public boolean isCanEdit() {
+		return canEdit;
+	}
+
+	public void setCanEdit(boolean isEdit) {
+		this.canEdit = isEdit;
+	}
+
 	public void saveEdition() {
 		for (Person p : people) {
 			if (p.hashCode() == currentPerson.hashCode())
 				p.replace(currentPerson);
 		}
-		initPeople();
-		people.add(currentPerson);
+		canEdit = false;
 	}
 	
 	public void cancel() {
-		
+		canEdit = false;
+		canAdd = false;
 	}
 	
 	public void edit(Person p) {
-		this.currentPerson = p;		
+		this.currentPerson = p;	
+		canEdit = true;
 	}
 	
 	public void remove(Person p) {
