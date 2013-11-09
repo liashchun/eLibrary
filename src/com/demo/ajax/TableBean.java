@@ -1,11 +1,15 @@
 package com.demo.ajax;
 
 import javax.faces.bean.*;
+
+import java.io.*;
 import java.util.*;
 
 @ManagedBean(name = "table")
 @SessionScoped
-public class TableBean {
+public class TableBean implements Serializable {
+	private static final long serialVersionUID = -8481463436338013136L;
+	
 	private List<Person> people;
 	private Person currentPerson;
 		
@@ -45,9 +49,25 @@ public class TableBean {
 		if (people == null) {
 			people = new ArrayList<Person>();
 		}
+		if (currentPerson == null) {
+			currentPerson = new Person();
+		}
 	}
 	
 	public void save() {
+		initPeople();
+		people.add(currentPerson);
+	}
+	
+	public void showAdd() {
+		currentPerson = new Person("" , "");
+	}
+	
+	public void saveEdition() {
+		for (Person p : people) {
+			if (p.hashCode() == currentPerson.hashCode())
+				p.replace(currentPerson);
+		}
 		initPeople();
 		people.add(currentPerson);
 	}
@@ -58,5 +78,9 @@ public class TableBean {
 	
 	public void edit(Person p) {
 		this.currentPerson = p;		
+	}
+	
+	public void remove(Person p) {
+		people.remove(p);
 	}
 }

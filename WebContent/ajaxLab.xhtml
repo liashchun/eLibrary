@@ -4,33 +4,52 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head></h:head>
+<h:head>AJAX in Action
+
+</h:head>
 <h:body>
 
-	<h:dataTable value = "#{table.people}" var="person">
+	<h:dataTable value = "#{table.people}" var="item">
 		<h:column>
-			#{person.name}
+			#{item.name}
 		</h:column>
 		<h:column>
-			#{person.email}
+			#{item.email}
 		</h:column>
 		<h:column>
 			<h:form>
+			
+					<h:commandButton action="#{table.remove(item)}" value = "Remove">
+					</h:commandButton>
 
 					<h:commandButton action="#{table.edit(item)}" value = "Edit">
 					</h:commandButton>
-
-			</h:form>
+					
+			</h:form>		
 		</h:column>
 	</h:dataTable>
-		
+<!-- 		Form for adding persons -->
 	<h:form>
-		<h:inputText value="#{table.currentPerson.name}">
-			</h:inputText>
-		<h:inputText value="#{table.currentPerson.email}">
-			</h:inputText>
-		<h:commandButton action = "#{table.add}" value="Add" />
+		<h:commandButton action="#{table.showAdd()}" value = "Add" />
 	</h:form>
-	
+
+<!-- 		Form for editing persons -->
+	<h:form>
+		<h:panelGrid columns="2" title="editing panelGroup">
+			<h:inputText value="#{table.currentPerson.name}" />
+			<h:inputText value="#{table.currentPerson.email}" />
+			<h:commandButton action = "#{table.cancel}" value="Cancel" />
+			<h:commandButton action = "#{table.edit(table.currentPerson)}" value="Save" />
+		</h:panelGrid> 
+  	</h:form>
+<!-- 		Form for adding persons -->
+	<h:form>
+		<h:panelGrid columns="2" title="adding panelGroup">
+			<h:inputText value="#{table.currentPerson.name}" />
+			<h:inputText value="#{table.currentPerson.email}" />
+			<h:commandButton action = "#{table.cancel}" value="Cancel" />
+			<h:commandButton action = "#{table.save}" value="Save" />
+		</h:panelGrid> 
+  	</h:form>
 </h:body>
 </html>

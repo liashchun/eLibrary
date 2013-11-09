@@ -24,9 +24,25 @@ public class Person {
 		this.name = name;
 		this.email = email;
 	}
+	
+	public void replace(Person p) {
+		this.name = p.getName();
+		this.email = p.getEmail();
+	}
+	
 	public static Person createRandomPerson() {
 		Double dName = Math.random();
 		Double dEmail = Math.random();
 		return new Person(dName.toString(), dEmail.toString());
+	}
+	
+	@Override 
+	public boolean equals(Object aPerson) {
+		Person anPerson = (Person) aPerson;
+		if ( anPerson.getName().equals(this.getName()) && 
+			 anPerson.getEmail().equals(this.getEmail()) ) {
+			return true;
+			}
+		return false;
 	}
 }
