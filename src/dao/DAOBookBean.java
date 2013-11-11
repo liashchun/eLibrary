@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -12,12 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- * A minimalistic CRUD implementation. Usually provides the implementation of
- * search methods as well.
- * 
- * @author adam-bien.com
- */
 @Stateless
 @Local(DAO.class)
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
@@ -44,6 +39,7 @@ public class DAOBookBean implements DAO<Integer, Book> {
 		return this.em.merge(t);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Book> findByNamedQuery(String namedQueryName) {
 		return this.em.createNamedQuery(namedQueryName).getResultList();
 	}
@@ -53,11 +49,13 @@ public class DAOBookBean implements DAO<Integer, Book> {
 		return findByNamedQuery(namedQueryName, parameters, 0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Book> findByNamedQuery(String queryName, int resultLimit) {
 		return this.em.createNamedQuery(queryName).setMaxResults(resultLimit)
 				.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Book> findByNamedQuery(String namedQueryName,
 			Map<String, Object> parameters, int resultLimit) {
 		Set<Entry<String, Object>> rawParameters = parameters.entrySet();

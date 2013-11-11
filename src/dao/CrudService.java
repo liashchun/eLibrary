@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -12,9 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
- * A minimalistic implementation of the generic CrudService.
- * 
- * @author adam-bien.com
+ * A minimal implementation of the generic CrudService.
  */
 @Stateless
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
@@ -30,12 +29,13 @@ public class CrudService {
 		return t;
 	}
 
-	@SuppressWarnings("unchecked")
+	
 	public <T> T find(Class<T> type, Object id) {
 		return (T) this.em.find(type, id);
 	}
 
-	public void delete(Class type, Object id) {
+	@SuppressWarnings("unchecked")
+	public void delete(@SuppressWarnings("rawtypes") Class type, Object id) {
 		Object ref = this.em.getReference(type, id);
 		this.em.remove(ref);
 	}
@@ -44,24 +44,29 @@ public class CrudService {
 		return (T) this.em.merge(t);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findWithNamedQuery(String namedQueryName) {
 		return this.em.createNamedQuery(namedQueryName).getResultList();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findWithNamedQuery(String namedQueryName,
 			Map<String, Object> parameters) {
 		return findWithNamedQuery(namedQueryName, parameters, 0);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findWithNamedQuery(String queryName, int resultLimit) {
 		return this.em.createNamedQuery(queryName).setMaxResults(resultLimit)
 				.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> List<T> findByNativeQuery(String sql, Class<T> type) {
 		return this.em.createNativeQuery(sql, type).getResultList();
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findWithNamedQuery(String namedQueryName,
 			Map<String, Object> parameters, int resultLimit) {
 		Set<Entry<String, Object>> rawParameters = parameters.entrySet();

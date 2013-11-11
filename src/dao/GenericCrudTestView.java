@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class GenericCrudTestView extends HttpServlet {
-
+	private static final long serialVersionUID = -435038000784687666L;
+	
 	@EJB
 	private GenericCrudTest crudTest;
 

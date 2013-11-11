@@ -10,18 +10,20 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 		@NamedQuery(name = Book.ALL, query = "Select b From Book b"),
 		@NamedQuery(name = Book.BY_NAME, query = "Select b From Book b where b.name = :name"),
-		@NamedQuery(name = Book.BY_NAME_AND_PAGES, query = "Select b From Book b where b.name = :name and b.numberOfPages =:pages"),
-		@NamedQuery(name = Book.ALL_DTO, query = "Select new com.abien.patterns.business.crud.domain.BookDTO(b.numberOfPages,b.name) From Book b") })
+		@NamedQuery(name = Book.BY_NAME_AND_PAGES, query = "Select b From Book b where b.name = :name and b.numberOfPages =:pages")
+})
 public class Book implements Serializable {
-
-	public final static String ALL = "com.abien.patterns.business.crud.domain.Book.ALL";
-	public final static String ALL_DTO = "com.abien.patterns.business.crud.domain.Book.ALL_DTO";
-	public final static String BY_NAME = "com.abien.patterns.business.crud.domain.Book.BY_NAME";
-	public final static String BY_NAME_AND_PAGES = "com.abien.patterns.business.crud.domain.Book.BY_NAME_AND_PAGES";
+	private static final long serialVersionUID = 6462584529896200013L;
+	
+	public final static String ALL = "dao.Book.ALL";
+	public final static String ALL_DTO = "dao.Book.ALL_DTO";
+	public final static String BY_NAME = "dao.Book.BY_NAME";
+	public final static String BY_NAME_AND_PAGES = "dao.Book.BY_NAME_AND_PAGES";
+	
 	@Id
+	private Integer id;
 	private String isbn;
 	private String name;
-	private int numberOfPages;
 
 	public Book() {
 	}
@@ -29,11 +31,6 @@ public class Book implements Serializable {
 	public Book(String isbn, String name) {
 		this.isbn = isbn;
 		this.name = name;
-	}
-
-	public Book(String isbn, String name, int numberOfPages) {
-		this(isbn, name);
-		this.numberOfPages = numberOfPages;
 	}
 
 	public String getIsbn() {
@@ -52,17 +49,17 @@ public class Book implements Serializable {
 		this.name = name;
 	}
 
-	public int getNumberOfPages() {
-		return numberOfPages;
+	
+	public Integer getId() {
+		return id;
 	}
 
-	public void setNumberOfPages(int numberOfPages) {
-		this.numberOfPages = numberOfPages;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "com.abien.samples.di.persistence.Book[isbn=" + isbn + "]";
+		return "dao.Book[isbn=" + isbn + "]";
 	}
-
 }
