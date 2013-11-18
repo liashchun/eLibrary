@@ -3,6 +3,7 @@ package beans;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManager;
+import javax.inject.*;
 import entities.*;
 import java.math.*;
 import dao.*;
@@ -12,6 +13,8 @@ import dao.*;
 public class LibrarianBean {
 	private String name;
     private String salary;
+    
+    @Inject CheckBean checkBean;
     
     public LibrarianBean() {
     }
@@ -29,20 +32,21 @@ public class LibrarianBean {
 		this.salary = salary;
 	}
 	
-	public String register() {
+	public boolean register() {
 		
-		EntityManager em = EntityManagerUtils.getEntityManager();
-		
-		try {
-			Librarian librarian = new Librarian(name, new BigDecimal(salary));
-			em.getTransaction().begin();
-			em.persist(librarian);
-			em.flush();
-			em.getTransaction().commit();
-		} finally {
-			em.close();
-		}
-		return "done?faces-redirect=true";
+		return checkBean.isCorrectName() && checkBean.isCorrectPass();		
+//		EntityManager em = EntityManagerUtils.getEntityManager();
+//		
+//		try {
+//			Librarian librarian = new Librarian(name, new BigDecimal(salary));
+//			em.getTransaction().begin();
+//			em.persist(librarian);
+//			em.flush();
+//			em.getTransaction().commit();
+//		} finally {
+//			em.close();
+//		}
+//		return "done?faces-redirect=true";
 	}
 	
 	

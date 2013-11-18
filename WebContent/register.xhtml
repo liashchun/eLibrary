@@ -8,12 +8,15 @@
 <body> 
 	<h:form>
 		<h:outputLabel value="Name:" for="name"/>
-		<h:inputText id="name" value="#{librarianBean.name}" required="true"/>
+		<h:inputText id="name" value="#{checkBean.name}" required="true"/>
 		<br/>
-		<h:outputLabel value="Salary:" for="salary"/>
-		<h:inputSecret id="salary" value="#{librarianBean.salary}" required="true"/>
+		<h:outputLabel value="Password:" for="password"/>
+		<h:inputSecret id="password" value="#{checkBean.password}" required="true"/>
 		<br/>
 		<h:commandButton value="Register" action="#{librarianBean.register()}" />
+		<f:ajax >
+			<h:outputLabel value="You can come in!" rendered="#{librarianBean.register()}" />	
+		</f:ajax>
 	</h:form>
 </body> 
 </html>
