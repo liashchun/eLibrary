@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+</h:head>
+<h:body>
+	
+	<h:form>
+		<!-- Control buttons -->
+		<h:panelGrid columns="3" >
+			<!-- Search button -->
+			<h:commandButton action="#{dogMB.updateDogStart()}" 
+				value="#{msgs.update}" rendered="#{userMB.userAdmin}" >
+				<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
+			</h:commandButton>
+						
+			<!-- Search button -->
+			<h:commandButton value="Search">
+				<f:ajax execute="this" render="searchForm" />
+			</h:commandButton>
+			
+			<!-- Search form -->
+			<h:form id="searchForm">
+				<h:panelGrid columns="2" >
+					<h:outputText value="Book name :" />
+					<h:inputText id="username" value="#{searchBean.bookName}" />
+					
+					<h:outputText value="Authors :" ></h:outputText>
+					<h:inputSecret id="authors" value="#{searchBean.authors}" />
+					
+					<h:outputText value="ISBN :" ></h:outputText>
+					<h:inputSecret id="isbn" value="#{searchBean.ISBN}" />
+					
+					<h:outputText value="Keywords :"></h:outputText>
+					<h:inputText id="keywords" value="#{searchBean.keywords}" />
+					
+					<h:outputText value="Genre :"></h:outputText>
+					<h:inputText id="genre" value="#{searchBean.genre}" />
+					
+					<h:commandButton type="submit" value="Submit" action="#{regBean.addUser}" />
+					<h:commandButton type="reset" value="Reset" />
+				</h:panelGrid>				 
+			</h:form>
+			
+						
+		</h:panelGrid>
+				
+		<h3>#{msgs.loginHello}: #{userMB.user.name} || 
+			<h:commandLink action="#{userMB.logOut()}" value="#{msgs.logout}" /> </h3>
+		<h:messages />
+		
+		<h:dataTable value="#{dogMB.allDogs}" var="dog" styleClass="table" 
+		headerClass="tableColumnsHeader" rowClasses="tableFirstLine,tableNextLine" >
+			<h:column>
+				<f:facet name="header">
+					#{msgs.dogName}
+				</f:facet>
+				
+				#{dog.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					#{msgs.dogWeight}
+				</f:facet>
+				
+				#{dog.weight}
+			</h:column>
+			<h:column>
+				<h:panelGrid columns="2">
+					<!-- Always save the id as hidden when you use a request scope MB -->
+					<h:inputHidden value="#{dog.id}" />
+					
+					<h:commandButton action="#{dogMB.updateDogStart()}" value="#{msgs.update}" rendered="#{userMB.userAdmin}" >
+						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
+					</h:commandButton>
+					<h:commandButton action="#{dogMB.deleteDogStart()}" value="#{msgs.delete}" rendered="#{userMB.userAdmin}" >
+						<f:setPropertyActionListener target="#{dogMB.dog}" value="#{dog}" />
+					</h:commandButton>
+				</h:panelGrid>
+			</h:column>
+		</h:dataTable>
+		<!-- This button is displayed to the user, just to you see the error msg  -->
+		<h:commandButton action="createDog" value="#{msgs.create} #{msgs.dog}" />
+	</h:form>
+</h:body>
+</html>
