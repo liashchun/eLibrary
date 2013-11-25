@@ -1,30 +1,38 @@
 package com.mb;
 
-import java.awt.Frame;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
+import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.faces.bean.*;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
 import javax.faces.application.FacesMessage;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.JOptionPane;
 
 import com.facade.*;
 import com.model.*;
-import com.utils.*;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped()
 public class LoginBean {
 	private static String REGISTRATION = "registration";
-	private static String WELCOME_READER = "/pages/protected/user/welcomeReader?faces-redirect=true";
+	private static String WELCOME_READER = "/pages/public/welcomeReader?faces-redirect=true";
+	private static String LOGOUT = "/pages/public/login.xhtml?faces-redirect=true";
 
 	private String email;
 	private String password;
 	
+	private Reader reader;
+	private Librarian librarian;
+	
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
 	@EJB
 	private ReaderFacade readerFacade;
 	@EJB
@@ -49,9 +57,15 @@ public class LoginBean {
 		this.email = email;
 	}
 
-	public String login(ActionEvent actionEvent)
-			throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		Reader reader = readerFacade.findReaderByEmail(email);
+	public String login()
+			throws IOException {
+		try {
+			getRequest().login(email, password);
+			reader = readerFacade.findReaderByEmail(email);
+			
+		} catch (ServletException e) {
+			return null;
+		}
 		
 		if (reader == null) {
 			FacesContext.getCurrentInstance().addMessage(
@@ -60,16 +74,8 @@ public class LoginBean {
 							"Email not found", null));
 			return null;
 		}
-
-		if (reader.getPassword().equals(password)) {
-			return WELCOME_READER;
-		} else {
-			FacesContext.getCurrentInstance().addMessage(
-					null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Wrong password", null));
-			return "login";
-		}
+		
+		return WELCOME_READER;
 	}
 
 	public String startRegistration() {
@@ -79,5 +85,20 @@ public class LoginBean {
 	public static HttpServletRequest getRequest() {
 		Object request = FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		return (HttpServletRequest) request;
+	}
+	
+	public boolean isAuthenticated() {
+		return getRequest().getUserPrincipal() != null;
+	}
+	
+	public String Logout() throws ServletException {
+		this.reader = null;
+		this.librarian = null;
+		
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		if (isAuthenticated()) {
+			getRequest().logout();
+		}
+		return LOGOUT;
 	}
 }
