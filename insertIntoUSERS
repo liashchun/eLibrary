@@ -1,0 +1,5 @@
+insert into eLibrary.USERS (`email`,`password`,`role`)
+	values('a@a.a','1','ADMIN');
+insert into eLibrary.USERS (`email`,`password`,`role`)
+	values('u@u.u','1','USER');
+select * from eLibrary.USERS;
