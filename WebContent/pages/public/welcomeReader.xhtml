@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+</h:head>
+<h:body>
+	
+	<h:form>
+		<!-- Control buttons -->
+		<h:panelGrid>
+			<!-- Search button -->
+			<h:commandButton action="#{searchBean.setVisibleSearch(true)}" 
+				value="#{msgs.search}">
+			</h:commandButton>
+			
+			<!-- Account button -->
+			<h:commandButton >  
+				value="#{msgs.account}">
+			</h:commandButton>
+			
+			<!-- Order button -->
+			<h:commandButton> 
+				value="#{msgs.orderStatus}">
+			</h:commandButton>
+			
+			<!-- Logout button -->
+			<h:commandButton> 
+				value="#{msgs.logout}">
+			</h:commandButton>
+		</h:panelGrid>
+		
+		<!-- Search form -->
+		<h:form id="searchForm" >
+			<h:panelGrid columns="2" >
+				<h:outputText value="Book name :" />
+				<h:inputText id="username" value="#{searchBean.bookName}" />
+				
+				<h:outputText value="Authors :" ></h:outputText>
+				<h:inputSecret id="authors" value="#{searchBean.authors}" />
+				
+				<h:outputText value="ISBN :" ></h:outputText>
+				<h:inputSecret id="isbn" value="#{searchBean.isbn}" />
+				
+				<h:outputText value="Keywords :"></h:outputText>
+				<h:inputText id="keywords" value="#{searchBean.keywords}" />
+				
+				<h:outputText value="Genre :"></h:outputText>
+				<h:inputText id="genre" value="#{searchBean.genre}" />
+				
+				<h:commandButton type="reset" value="Reset" />
+				<h:commandButton type="submit" value="Submit" action="#{searchBean.search()}"/>
+			</h:panelGrid>				 
+		</h:form>
+	</h:form>
+</h:body>
+</html>

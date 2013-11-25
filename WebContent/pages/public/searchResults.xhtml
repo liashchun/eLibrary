@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="main.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<h:messages />
+		<h:dataTable value="#{searchBean.selectedList}" var="book" styleClass="table" headerClass="tableColumnsHeader" rowClasses="tableFirstLine,tableNextLine" >
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookHeader}
+				</f:facet>
+						
+				<h:outputText value="#{searchBean.selectedList.indexOf(book)}" />
+			</h:column>
+			<h:column>
+				<h:panelGrid columns="1">
+					<!-- Always save the id as hidden when you use a request scope MB -->
+					<h:inputHidden value="#{book.id}" />
+					
+					<h:selectBooleanCheckbox id="checkBox" />					
+				</h:panelGrid>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookName}
+				</f:facet>
+				
+				#{book.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookAuthors}
+				</f:facet>
+				
+				#{book.authors}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookGenre}
+				</f:facet>
+				
+				#{book.genre}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookDescription}
+				</f:facet>
+				
+				#{book.description}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookKeywords}
+				</f:facet>
+				
+				#{book.keywords}
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					#{msgs.bookisbn}
+				</f:facet>
+				
+				#{book.ISBN}
+			</h:column>
+		</h:dataTable>
+		<h:commandButton type="reset" value="Reset" />
+		<h:commandButton type="submit" value="Submit" action="#{searchBean.makeOrder()}"/>
+	</h:form>
+</h:body>
+</html>
