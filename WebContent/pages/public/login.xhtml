@@ -9,21 +9,22 @@
 </h:head>
 <h:body>
 	<p>Login to access secure pages:</p>
-	<form method="post" action="j_security_check">
+	<h:form>
 		<h:messages layout="table" errorStyle="background: #AFEEEE;"
 			infoStyle="background: #AFEEEE;" globalOnly="true" />
 		<h:panelGrid columns="2">
-			<h:outputLabel for ="uname" value="Enter e-mail :  "/>
-			<h:inputText id="uname" value="#{regBean.email}"/>
-			<h:outputLabel for ="pass" value="Enter Password  :"/>
-			<h:inputSecret id="pass" value="#{regBean.password}"/>
+			<h:outputLabel for ="uname" value="e-mail:  "/>
+			<h:inputText id="uname" value="#{loginBean.email}"/>
+			<h:outputLabel for ="pass" value="Password:"/>
+			<h:inputSecret id="pass" value="#{loginBean.password}"/>
 			<h:outputText/><h:outputText/>
 			<h:outputText/>
-			<h:commandButton id="login" name = "Log in" value="Login" action="#{regBean.login()}"/>
+			<h:commandButton id="login" name = "Log in" value="Login" action="#{loginBean.login()}"/>
 			<h:outputText/><h:outputText/>
-			<h:commandButton id="SignIn" name="Register" value="#{regBean.startRegistration()}" />
+			<h:outputText/>
+			<h:commandButton id="SignIn" name="Register" value = "Register" action="#{loginBean.startRegistration()}" />
 		</h:panelGrid>
 		<br />
-	</form>
+	</h:form>
 </h:body>
 </html>

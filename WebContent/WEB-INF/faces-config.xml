@@ -21,23 +21,36 @@
 	</navigation-rule>
 	<navigation-rule>
 		<navigation-case>
-			<from-outcome>createDog</from-outcome>
-			<to-view-id>/pages/protected/admin/createDog.xhtml</to-view-id>
-			<redirect/>
+			<from-outcome>searchResults</from-outcome>
+			<to-view-id>/pages/public/searchResults.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	<navigation-rule>
+		<from-view-id>/pages/public/login2.xhtml</from-view-id>
 		<navigation-case>
-			<from-outcome>updateDog</from-outcome>
-			<to-view-id>/pages/protected/admin/updateDog.xhtml</to-view-id>
+			<from-outcome>registration</from-outcome>
+			<to-view-id>/pages/public/registration.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	<navigation-rule>
-		<navigation-case>
-			<from-outcome>deleteDog</from-outcome>
-			<to-view-id>/pages/protected/admin/deleteDog.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
+<!-- 	<navigation-rule> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>createDog</from-outcome> -->
+<!-- 			<to-view-id>/pages/protected/admin/createDog.xhtml</to-view-id> -->
+<!-- 			<redirect/> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+<!-- 	<navigation-rule> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>updateDog</from-outcome> -->
+<!-- 			<to-view-id>/pages/protected/admin/updateDog.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
+<!-- 	<navigation-rule> -->
+<!-- 		<navigation-case> -->
+<!-- 			<from-outcome>deleteDog</from-outcome> -->
+<!-- 			<to-view-id>/pages/protected/admin/deleteDog.xhtml</to-view-id> -->
+<!-- 		</navigation-case> -->
+<!-- 	</navigation-rule> -->
 
 	<application>
 		<resource-bundle>

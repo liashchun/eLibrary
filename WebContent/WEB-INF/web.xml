@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>eLibraryJSF</display-name>
 	<welcome-file-list>
-		<welcome-file>pages/protected/user/listAllDogs.xhtml</welcome-file>
+		<welcome-file>pages/public/login.xhtml</welcome-file>
 	</welcome-file-list>
 	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -40,14 +40,14 @@
 		</auth-constraint>
 	</security-constraint>
 	
-	<!-- Login page -->	
-	<login-config>
-		<auth-method>FORM</auth-method>
-		<form-login-config>
-			<form-login-page>/pages/public/login.xhtml</form-login-page>
-			<form-error-page>/pages/public/loginError.xhtml</form-error-page>
-		</form-login-config>
-	</login-config>
+<!-- 	Login page	  -->
+<!-- 	<login-config> -->
+<!-- 		<auth-method>FORM</auth-method> -->
+<!-- 		<form-login-config> -->
+<!-- 			<form-login-page>/pages/public/login2.xhtml</form-login-page> -->
+<!-- 			<form-error-page>/pages/public/loginError.xhtml</form-error-page> -->
+<!-- 		</form-login-config> -->
+<!-- 	</login-config> -->
 	
 	<!-- System roles -->
 	<security-role>

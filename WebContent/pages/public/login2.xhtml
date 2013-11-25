@@ -18,11 +18,9 @@
 			<h:outputLabel value="Password: " />
 			<input type="password" id="j_password" name="j_password" />
 			<h:outputText value="" />
-			<h:panelGrid columns="1">
-				<input type="submit" name="submit" value="Login" />
-			</h:panelGrid>
-			<h:panelGrid columns="1">
-				<input type="submit" name="Register" value="#{regBean.startRegistration()}" />
+			<h:panelGrid columns="2">
+				<h:commandButton id="SignIn" name="Register" value = "Register" action="#{loginBean.startRegistration()}" />
+				<input type="submit" name="Submit" value="Log in" />
 			</h:panelGrid>
 		</h:panelGrid>
 		<br />
